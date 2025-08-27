@@ -1045,8 +1045,13 @@ export const en = {
       success:
         'Consent request sent to {{parent.formatted.fullNameAndRelationship}}'
     },
-    responses: {
-      label: 'Consent responses'
+    replies: {
+      pending: 'Consent requests',
+      requests: 'Consent requests',
+      responses: 'Consent responses'
+    },
+    hasNoContactDetails: {
+      description: 'There are no contact details for this child'
     },
     preScreen: {
       label: 'Pre-screening checks',
@@ -1273,7 +1278,7 @@ export const en = {
       label: 'Phone number'
     },
     decisionStatus: {
-      label: 'Decision'
+      label: 'Status'
     },
     alternative: {
       label: 'Consent also given for injected vaccine?',
