@@ -834,6 +834,7 @@ export const en = {
       showOnly: 'Show only',
       archived: 'Archived records',
       hasMissingNhsNumber: 'Children missing an NHS&nbsp;number',
+      hasNoContactDetails: 'Children without contact details',
       post16: 'Children over 16 years old'
     },
     archiveReason: {
