@@ -1004,7 +1004,7 @@ export const en = {
       label: 'Session note'
     },
     consent: {
-      title: 'Consent for %s',
+      title: 'Consent',
       label: 'Consent status'
     },
     screen: {
@@ -1015,12 +1015,11 @@ export const en = {
       label: 'PSD status'
     },
     register: {
+      title: 'Register attendance',
       label: 'Registration status'
     },
-    outcome: {
-      label: 'Session outcome'
-    },
     report: {
+      title: 'Programme status',
       label: 'Programme status'
     },
     nextActivity: {
