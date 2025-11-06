@@ -278,9 +278,13 @@ export const PreScreenQuestion = {
  */
 export const ProgrammeOutcome = {
   Ineligible: 'Not eligible',
-  Eligible: 'Eligible',
+  Consent: 'Needs consent',
+  Refused: 'Has refusal',
+  Triage: 'Needs triage',
   Due: 'Due vaccination',
-  Vaccinated: 'Vaccinated'
+  Deferred: 'Could not vaccinate',
+  PartiallyVaccinated: 'Partially vaccinated',
+  Vaccinated: 'Fully vaccinated'
 }
 
 /**
@@ -353,8 +357,8 @@ export const ProgrammePreset = {
  * @enum {string}
  */
 export const RecordVaccineCriteria = {
-  Any: 'Either injection',
-  AlternativeInjectionOnly: 'Gelatine-free injection',
+  Any: 'Either',
+  AlternativeInjectionOnly: 'Alternative injection',
   IntranasalOnly: 'Nasal spray'
 }
 
@@ -519,8 +523,7 @@ export const VaccinationOutcome = {
   Contraindications: 'Child contraindicated',
   Refused: 'Child refused',
   Absent: 'Child absent',
-  Unwell: 'Child unwell',
-  NoConsent: 'Unable to contact parent'
+  Unwell: 'Child unwell'
 }
 
 /**

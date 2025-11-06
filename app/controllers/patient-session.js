@@ -223,7 +223,7 @@ export const patientSessionController = {
 
     if (
       register === RegistrationOutcome.Absent &&
-      patientSession.report !== ProgrammeOutcome.Eligible
+      patientSession.report !== ProgrammeOutcome.Consent
     ) {
       // Record vaccination outcome as absent if safe to vaccinate
       const programme = Programme.findOne(session.programme_ids[0], data)
