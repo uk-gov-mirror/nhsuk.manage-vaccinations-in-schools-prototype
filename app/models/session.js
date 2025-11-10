@@ -590,69 +590,17 @@ export class Session {
   }
 
   /**
-   * Get session tally counts per programme
+   * Get session tally programme count
    *
    * @param {string} programme_id - Programme ID
-   * @returns {object} Session tally counts
+   * @param {ProgrammeOutcome} report - Programme outcome
+   * @param {VaccineCriteria} vaccineCriteria - Vaccine criteria
+   * @returns {number} Session tally count
    */
-  tally(programme_id) {
-    return {
-      eligible: getSessionActivityCount(this, [
-        {
-          programme_id
-        }
-      ]),
-      noResponse: getSessionActivityCount(this, [
-        {
-          consent: ConsentOutcome.NoResponse
-        }
-      ]),
-      consentGiven: getSessionActivityCount(this, [
-        {
-          consentGiven: true,
-          programme_id
-        }
-      ]),
-      consentGivenForIntranasal: getSessionActivityCount(this, [
-        {
-          consent: ConsentOutcome.GivenForIntranasal,
-          programme_id
-        }
-      ]),
-      consentGivenForAlternativeInjection: getSessionActivityCount(this, [
-        {
-          consent: ConsentOutcome.GivenForAlternativeInjection,
-          programme_id
-        }
-      ]),
-      didNotConsent: getSessionActivityCount(this, [
-        {
-          didNotConsent: true,
-          programme_id
-        }
-      ]),
-      vaccinated: getSessionActivityCount(this, [
-        {
-          report: ProgrammeOutcome.Vaccinated,
-          'vaccine.criteria': VaccineCriteria.Injection,
-          programme_id
-        }
-      ]),
-      vaccinatedIntranasal: getSessionActivityCount(this, [
-        {
-          report: ProgrammeOutcome.Vaccinated,
-          'vaccine.criteria': VaccineCriteria.Intranasal,
-          programme_id
-        }
-      ]),
-      vaccinatedAlternativeInjection: getSessionActivityCount(this, [
-        {
-          report: ProgrammeOutcome.Vaccinated,
-          'vaccine.criteria': VaccineCriteria.AlternativeInjection,
-          programme_id
-        }
-      ])
-    }
+  tally(programme_id, report, vaccineCriteria) {
+    return getSessionActivityCount(this, [
+      { programme_id, report, vaccineCriteria }
+    ])
   }
 
   get dateSummary() {
