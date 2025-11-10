@@ -295,6 +295,29 @@ export const sessionController = {
       }
     }
 
+    // Filter by sub-status(es)
+    const statusFilters = {
+      programmeConsent: request.query.programmeConsent || 'none',
+      programmeDeferred: request.query.programmeDeferred || 'none',
+      programmeRefused: request.query.programmeRefused || 'none',
+      programmeVaccinated: request.query.programmeVaccinated || 'none'
+    }
+
+    for (const name of [
+      'programmeConsent',
+      'programmeDeferred',
+      'programmeRefused',
+      'programmeVaccinated'
+    ]) {
+      if (statusFilters[name] !== 'none') {
+        let statuses = statusFilters[name]
+        statuses = Array.isArray(statuses) ? statuses : [statuses]
+        results = results.filter((patientSession) =>
+          statuses.includes(patientSession[name])
+        )
+      }
+    }
+
     // Filter by year group
     if (yearGroup) {
       results = results.filter(({ patient }) =>
@@ -354,14 +377,10 @@ export const sessionController = {
       register: {
         register: RegistrationOutcome,
         vaccineCriteria: session.offersAlternativeVaccine && VaccineCriteria,
-        instruct: session.psdProtocol && InstructionOutcome,
-        report: ProgrammeOutcome
+        instruct: session.psdProtocol && InstructionOutcome
       },
       record: {
         vaccineCriteria: session.offersAlternativeVaccine && VaccineCriteria
-      },
-      report: {
-        report: ProgrammeOutcome
       }
     }
 
@@ -381,6 +400,10 @@ export const sessionController = {
     delete data.options
     delete data.q
     delete data.programme_ids
+    delete data.programmeConsent
+    delete data.programmeDeferred
+    delete data.programmeRefused
+    delete data.programmeVaccinated
     delete data.vaccineCriteria
     delete data.instruct
     delete data.register
@@ -408,7 +431,15 @@ export const sessionController = {
     }
 
     // Checkboxes
-    for (const key of ['options', 'programme_ids', 'yearGroup']) {
+    for (const key of [
+      'options',
+      'programme_ids',
+      'programmeConsent',
+      'programmeDeferred',
+      'programmeRefused',
+      'programmeVaccinated',
+      'yearGroup'
+    ]) {
       const value = request.body[key]
       const values = Array.isArray(value) ? value : [value]
       if (value) {

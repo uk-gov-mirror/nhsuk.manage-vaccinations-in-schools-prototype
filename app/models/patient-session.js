@@ -4,10 +4,14 @@ import filters from '@x-govuk/govuk-prototype-filters'
 import {
   AuditEventType,
   ConsentOutcome,
+  ConsentWindow,
+  ProgrammeConsentStatus,
+  ProgrammeDeferredStatus,
   ProgrammeOutcome,
   RecordVaccineCriteria,
   ReplyDecision,
-  ScreenOutcome
+  ScreenOutcome,
+  VaccinationOutcome
 } from '../enums.js'
 import { getDateValueDifference, getYearGroup, today } from '../utils/date.js'
 import {
@@ -432,6 +436,52 @@ export class PatientSession {
   }
 
   /**
+   * Get programme consent status
+   *
+   * @returns {ProgrammeConsentStatus} Programme consent status
+   */
+  get programmeConsent() {
+    if (this.session.consentWindow === ConsentWindow.None) {
+      return ProgrammeConsentStatus.NotScheduled
+    } else if (this.session.consentWindow === ConsentWindow.Opening) {
+      return ProgrammeConsentStatus.Scheduled
+    }
+
+    switch (this.consent) {
+      case ConsentOutcome.NoRequest:
+        return ProgrammeConsentStatus.Failed
+      case ConsentOutcome.NoResponse:
+        return ProgrammeConsentStatus.NoResponse
+      case ConsentOutcome.Declined:
+        return ProgrammeConsentStatus.FollowUp
+    }
+  }
+
+  /**
+   * Get programme deferred status
+   *
+   * @returns {ProgrammeDeferredStatus} Programme deferred status
+   */
+  get programmeDeferred() {
+    if (this.screen === ScreenOutcome.DoNotVaccinate) {
+      return ProgrammeDeferredStatus.Contraindicated
+    } else if (this.screen === ScreenOutcome.DelayVaccination) {
+      return ProgrammeDeferredStatus.DelayVaccination
+    }
+
+    switch (this.outcome) {
+      case VaccinationOutcome.Absent:
+        return ProgrammeDeferredStatus.ChildAbsent
+      case VaccinationOutcome.Contraindications:
+        return ProgrammeDeferredStatus.ChildContraindicated
+      case VaccinationOutcome.Refused:
+        return ProgrammeDeferredStatus.ChildRefused
+      case VaccinationOutcome.Unwell:
+        return ProgrammeDeferredStatus.ChildUnwell
+    }
+  }
+
+  /**
    * Consent has been given
    *
    * @returns {boolean} Consent has been given
@@ -576,7 +626,7 @@ export class PatientSession {
       case ProgrammeOutcome.Refused:
         return this.consent
       case ProgrammeOutcome.Consent:
-        return this.consent
+        return this.programmeConsent
     }
   }
 

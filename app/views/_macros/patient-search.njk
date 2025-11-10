@@ -94,6 +94,66 @@
       }) if enums }}
     {% endfor %}
 
+    {{ radios({
+      classes: "nhsuk-radios--small",
+      fieldset: {
+        legend: {
+          classes: "nhsuk-fieldset__legend--s",
+          text: __("patientSession.report.label")
+        }
+      },
+      items: [{
+        text: "Any",
+        value: "none",
+        checked: data.report or data.report == "none"
+      }, {
+        text: ProgrammeOutcome.Ineligible
+      }, {
+        text: ProgrammeOutcome.Consent,
+        conditional: {
+          html: checkboxes({
+            classes: "nhsuk-checkboxes--small",
+            items: enumItems(ProgrammeConsentStatus),
+            decorate: "programmeConsent"
+          })
+        }
+      }, {
+        text: ProgrammeOutcome.Refused,
+        conditional: {
+          html: checkboxes({
+            classes: "nhsuk-checkboxes--small",
+            items: enumItems(ProgrammeRefusedStatus),
+            decorate: "programmeRefused"
+          })
+        }
+      }, {
+        text: ProgrammeOutcome.Triage
+      }, {
+        text: ProgrammeOutcome.Due
+      }, {
+        text: ProgrammeOutcome.Deferred,
+        conditional: {
+          html: checkboxes({
+            classes: "nhsuk-checkboxes--small",
+            items: enumItems(ProgrammeDeferredStatus),
+            decorate: "programmeDeferred"
+          })
+        }
+      }, {
+        text: ProgrammeOutcome.PartiallyVaccinated
+      }, {
+        text: ProgrammeOutcome.Vaccinated,
+        conditional: {
+          html: checkboxes({
+            classes: "nhsuk-checkboxes--small",
+            items: enumItems(ProgrammeVaccinatedStatus),
+            decorate: "programmeVaccinated"
+          })
+        }
+      }],
+      decorate: "report"
+    }) }}
+
     {{ checkboxes({
       classes: "nhsuk-checkboxes--small",
       fieldset: {

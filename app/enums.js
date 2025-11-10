@@ -278,6 +278,49 @@ export const ProgrammeOutcome = {
  * @readonly
  * @enum {string}
  */
+export const ProgrammeConsentStatus = {
+  NotScheduled: 'No request',
+  Scheduled: 'Request scheduled',
+  Failed: 'Request failed',
+  NoResponse: 'No response',
+  FollowUp: 'Follow-up requested'
+}
+
+/**
+ * @readonly
+ * @enum {string}
+ */
+export const ProgrammeRefusedStatus = {
+  Conflict: 'Consent conflict',
+  Refusal: 'Consent refused'
+}
+
+/**
+ * @readonly
+ * @enum {string}
+ */
+export const ProgrammeDeferredStatus = {
+  Contraindicated: 'Contraindicated',
+  DelayVaccination: 'Vaccination delayed',
+  ChildAbsent: 'Child absent',
+  ChildContraindicated: 'Child contraindicated',
+  ChildRefused: 'Child refused',
+  ChildUnwell: 'Child unwell'
+}
+
+/**
+ * @readonly
+ * @enum {string}
+ */
+export const ProgrammeVaccinatedStatus = {
+  Vaccinated: 'Vaccinated',
+  AlreadyVaccinated: 'Already vaccinated'
+}
+
+/**
+ * @readonly
+ * @enum {string}
+ */
 export const ProgrammeStatus = {
   Planned: 'Planned',
   Current: 'Current',
