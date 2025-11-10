@@ -580,11 +580,6 @@ export class Session {
           report: ProgrammeOutcome.Due,
           instruct: InstructionOutcome.Needed
         }
-      ]),
-      stillToVaccinate: getSessionActivityCount(this, [
-        {
-          stillToVaccinate: true
-        }
       ])
     }
   }
