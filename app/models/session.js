@@ -5,7 +5,6 @@ import _ from 'lodash'
 
 import {
   AcademicYear,
-  Activity,
   ConsentOutcome,
   ConsentWindow,
   InstructionOutcome,
@@ -578,7 +577,7 @@ export class Session {
       ]),
       instruct: getSessionActivityCount(this, [
         {
-          nextActivity: Activity.Record,
+          report: ProgrammeOutcome.Due,
           instruct: InstructionOutcome.Needed
         }
       ]),
